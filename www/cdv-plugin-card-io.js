@@ -1,3 +1,4 @@
+cordova.define("card.io.cordova.mobilesdk.CardIO", function(require, exports, module) {
 /**
  * cdv-plugin-card-io.js
  *
@@ -32,6 +33,15 @@ function CardIO() {
  */
 CardIO.prototype.scan = function(options, onSuccess, onFailure) {
   cordova.exec(onSuccess, onFailure, "CardIO", "scan", [options]);
+};
+CardIO.prototype.arrayBufferToBase64 = function ( buffer ) {
+   var binary = '';
+   var bytes = new Uint8Array( buffer );
+   var len = bytes.byteLength;
+   for (var i = 0; i < len; i++) {
+       binary += String.fromCharCode( bytes[ i ] );
+   }
+   return window.btoa( binary );
 };
 
 /**
@@ -69,3 +79,5 @@ CardIO.prototype.version = function(callback) {
  * Plugin setup boilerplate.
  */
 module.exports = new CardIO();
+
+});
